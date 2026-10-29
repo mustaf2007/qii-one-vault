@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>خزنة الملاحظات | QII One Vault</title>
+  <meta name="description" content="مشروع QII One التجريبي: ملاحظات خاصة لكل مستخدم، مدعوم بقاعدة بيانات Supabase وسياسات RLS.">
+  <link rel="stylesheet" href="assets/css/vault.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">QII</span>
+      <span>
+        <strong>QII One Vault</strong><br>
+        <small>Turning Data Into Insight.</small>
+      </span>
+    </a>
+    <nav>
+      <a class="btn btn-ghost" href="app.html">دخول الخزنة</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>خزنة ملاحظات خاصة — بياناتك لا يراها أحد سواك</h1>
+      <p>
+        مشروع تجريبي يعتمد على قاعدة بيانات <strong>Supabase</strong> مع تفعيل
+        <strong>RLS (Row Level Security)</strong>: كل مستخدم يسجّل دخوله برقم المستخدم الخاص به
+        <code>auth.uid()</code>، وسياسات قاعدة البيانات تمنع ظهور أي ملاحظة لمستخدم آخر —
+        حتى لو حاول أحدهم الاستعلام مباشرة من الواجهة البرمجية.
+      </p>
+      <a class="btn btn-primary" href="app.html">ابدأ الآن — تسجيل الدخول أو إنشاء حساب</a>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>1) تسجيل دخول آمن</h2>
+        <p>حسابات حقيقية عبر Supabase Auth (بريد + كلمة مرور). الجلسة محفوظة محلياً بعد الموافقة فقط.</p>
+      </article>
+      <article class="card">
+        <h2>2) محتوى خاص لكل مستخدم</h2>
+        <p>جدول <code>notes</code> يحفظ كل ملاحظة مع <code>user_id</code> تلقائياً من هوية المستخدم الحالي.</p>
+      </article>
+      <article class="card">
+        <h2>3) عزل على مستوى قاعدة البيانات</h2>
+        <p>سياسات RLS: <code>auth.uid() = user_id</code> — العزل يتم داخل PostgreSQL نفسها وليس في الواجهة فقط.</p>
+      </article>
+      <article class="card">
+        <h2>4) زر فحص العزل</h2>
+        <p>داخل الخزنة زر «افحص العزل» يحاول قراءة كل الصفوف وينبّهك إن ظهر أي صف لا يخصك.</p>
+      </article>
+    </section>
+
+    <section class="notice">
+      <h2>لماذا Supabase؟</h2>
+      <p>
+        Supabase يعطيك قاعدة بيانات PostgreSQL حقيقية مع نظام هوية وRLS جاهزين، ويمكن ربطها من
+        المتصفح مباشرة بمفتاح عام (anon key) فقط — دون وضع أي مفتاح سري في الكود.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>QII One — Turning Data Into Insight. | مشروع تجريبي تعليمي.</p>
+  </footer>
+</body>
+</html>

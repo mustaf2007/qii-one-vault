@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الخزنة | QII One Vault</title>
+  <meta name="description" content="سجّل دخولك واكتب ملاحظاتك الخاصة — لا يراها غيرك بفضل RLS على Supabase.">
+  <link rel="stylesheet" href="assets/css/vault.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">QII</span>
+      <span>
+        <strong>QII One Vault</strong><br>
+        <small>Turning Data Into Insight.</small>
+      </span>
+    </a>
+    <nav>
+      <a class="btn btn-ghost" href="index.html">الرئيسية</a>
+      <button id="signOutBtn" class="btn btn-ghost hidden" type="button">تسجيل الخروج</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- رسالة الإعداد عند غياب بيانات الاتصال -->
+    <section id="setupNotice" class="notice warn hidden">
+      <h2>الإعداد غير مكتمل</h2>
+      <p>
+        افتح الملف <code>assets/js/config.js</code> وضع فيه رابط مشروع Supabase والمفتاح العام
+        (anon key) ثم أعد تحميل الصفحة. الخطوات كاملة في <code>README.md</code>.
+      </p>
+    </section>
+
+    <!-- نموذج الدخول / إنشاء حساب -->
+    <section id="authView" class="auth-box hidden">
+      <div class="tabs" role="tablist">
+        <button id="tabLogin" class="tab active" type="button" role="tab" aria-selected="true">تسجيل الدخول</button>
+        <button id="tabSignup" class="tab" type="button" role="tab" aria-selected="false">حساب جديد</button>
+      </div>
+
+      <form id="authForm" novalidate>
+        <div class="field">
+          <label for="email">البريد الإلكتروني</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">كلمة المرور (6 أحرف على الأقل)</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required>
+        </div>
+        <p id="authMessage" class="form-message" role="status" aria-live="polite"></p>
+        <button id="authSubmit" class="btn btn-primary wide" type="submit">دخول</button>
+      </form>
+
+      <p class="hint">
+        عند «حساب جديد» أنشئ مستخدماً جديداً في Supabase Auth. للاختبار السريع فعّل
+        <em>Confirm email = off</em> من لوحة Supabase (Authentication → Providers → Email).
+      </p>
+    </section>
+
+    <!-- مساحة الملاحظات -->
+    <section id="vaultView" class="hidden">
+      <div class="vault-head">
+        <div>
+          <h1>ملاحظاتي الخاصة</h1>
+          <p class="who">أنت مسجّل الدخول بحساب: <strong id="userEmail"></strong></p>
+        </div>
+        <button id="rlsCheckBtn" class="btn btn-ghost" type="button">افحص العزل (RLS)</button>
+      </div>
+
+      <p id="rlsResult" class="rls-result" role="status" aria-live="polite"></p>
+
+      <form id="noteForm" class="note-form">
+        <div class="field">
+          <label for="noteTitle">عنوان الملاحظة</label>
+          <input id="noteTitle" type="text" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label for="noteBody">النص</label>
+          <textarea id="noteBody" rows="3" maxlength="4000"></textarea>
+        </div>
+        <p id="noteMessage" class="form-message" role="status" aria-live="polite"></p>
+        <button class="btn btn-accent" type="submit">حفظ الملاحظة</button>
+      </form>
+
+      <ul id="notesList" class="notes-list" aria-live="polite"></ul>
+      <p id="emptyState" class="hint hidden">لا توجد ملاحظات بعد — أضف أول ملاحظة من الأعلى.</p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>QII One — Turning Data Into Insight. | مشروع تجريبي تعليمي.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/vault.js"></script>
+</body>
+</html>
